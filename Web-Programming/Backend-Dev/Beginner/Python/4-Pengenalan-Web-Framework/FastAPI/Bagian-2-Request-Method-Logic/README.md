@@ -1,6 +1,9 @@
 # Table of Contents
 - [GET HTTP Request Method](#get-http-request-method)
 - [POST HTTP Request Method](#post-http-request-method)
+- [PUT HTTP Request Method](#put-http-request-method)
+- [DELETE HTTP Request Method](#delete-http-request-method)
+- [Rangkuman]()
 
 # GET HTTP Request Method
 ## Creating a FastAPI Application
@@ -244,3 +247,51 @@ async def delete_user(user_name: str): # * http://127.0.0.1:8000/users/delete_us
             USERS.pop(i)
             break
 ```
+
+# Rangkuman
+1. GET HTTP Request Method
+    - FastAPI memungkinkan kita membuat API endpoint dengan metode GET.
+    - Kita menggunakan dekorator `@app.get()` untuk mendefinisikan API endpoint dengan metode GET.
+    - Fungsi yang dihubungkan dengan API endpoint akan dipanggil saat endpoint diakses.
+    - Kita dapat mengembalikan respons dari API dalam berbagai bentuk, seperti dictionary, list, string, dll.
+    - FastAPI juga mendukung penggunaan async/await untuk menjalankan operasi asinkron.
+    - Server FastAPI dapat dijalankan dengan menggunakan perintah `uvicorn main:app --reload`.
+
+2. POST HTTP Request Method
+    - Metode POST dalam permintaan HTTP digunakan untuk membuat data baru.
+    - Metode POST memungkinkan pengiriman data dalam tubuh permintaan (`request body`).
+    - Dalam FastAPI, kita dapat menggunakan dekorator `@app.post()` untuk mendefinisikan API endpoint dengan metode POST.
+    - Data yang dikirimkan melalui tubuh permintaan dapat diakses dalam fungsi yang terhubung dengan API endpoint.
+
+2. PUT HTTP Request Method
+    - Metode PUT dalam permintaan HTTP digunakan untuk memperbaharui data.
+    - Metode PUT memungkinkan pengiriman/Menggantikan data dalam tubuh permintaan (`request body`).
+    - Dalam FastAPI, kita dapat menggunakan dekorator `@app.put()` untuk mendefinisikan API endpoint dengan metode PUT.
+    - Data yang dikirimkan melalui tubuh permintaan dapat diakses dalam fungsi yang terhubung dengan API endpoint.
+
+3. DELETE HTTP Request Method
+    - Metode DELETE dalam permintaan HTTP digunakan untuk menghapus data.
+    - Dalam FastAPI, kita dapat menggunakan dekorator `@app.delete()` untuk mendefinisikan API endpoint dengan metode DELETE.
+    - Data yang dihapus berdasarkan parameter yang ditentukan dalam URL endpoint.
+
+4. Path Parameter
+    - Path parameter digunakan untuk menyampaikan data spesifik ke sebuah API endpoint.
+    - Dalam FastAPI, path parameter didefinisikan sebagai bagian dari path URL yang diapit oleh tanda kurung kurawal `{}`.
+    - Path parameter dapat digunakan dalam logika pemrosesan API.
+    - FastAPI secara otomatis mengkonversi tipe data inputan berdasarkan definisi parameter fungsi.
+    - Penting untuk memperhatikan urutan deklarasi fungsi route handler yang menggunakan path parameter agar tidak terjadi konflik.
+
+5. Query Parameter
+    - Query parameter digunakan untuk mengirimkan data opsional ke sebuah API endpoint.
+    - Dalam FastAPI, query parameter didefinisikan sebagai pasangan `"kunci-nilai"` yang ditambahkan setelah tanda tanya `?` dalam URL.
+    - Query parameter dapat digunakan untuk filter, sorting, paginasi, dan operasi lain pada data yang dikembalikan oleh API.
+    - Dalam FastAPI, query parameter dapat diterima sebagai argumen fungsi dengan memberikan nilai default.
+
+
+
+
+
+Interactive API docs
+
+FastAPI menyediakan dokumentasi API interaktif otomatis menggunakan Swagger UI atau ReDoc.
+Dokumentasi API dapat diakses melalui URL seperti http://127.0.0.1:8000/docs atau http://127.0.0.1:8000/redoc.

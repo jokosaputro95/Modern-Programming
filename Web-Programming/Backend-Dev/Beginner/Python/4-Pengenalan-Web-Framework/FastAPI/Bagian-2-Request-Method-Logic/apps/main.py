@@ -112,3 +112,11 @@ async def delete_user(user_name: str): # * http://127.0.0.1:8000/users/delete_us
         if user.get("name").casefold() == user_name.casefold():
             USERS.pop(i)
             break
+
+# @app.delete('/users/{user_id}')
+# async def delete_user(user_id: int):
+#     for i in range(len(USERS)):
+#         if USERS[i]['id'] == user_id:
+#             del USERS[i]
+#             return {"message": "User deleted successfully."}
+#     return {"message": "User not found."}
