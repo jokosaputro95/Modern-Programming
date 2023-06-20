@@ -354,5 +354,14 @@ crashlytics-build.properties
 fabric.properties
 
 ### AndroidStudio Patch ###
-
 !/gradle/wrapper/gradle-wrapper.jar
+
+### Database ###
+*.accdb
+*.db
+*.dbf
+*.mdb
+*.pdb
+*.sqlite3
+*.db-shm
+*.db-wal
