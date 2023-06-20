@@ -1,14 +1,14 @@
-from fastapi import FastAPI
+from fastapi import Body, FastAPI
 
 app = FastAPI() # * Membuat instance dari kelas FastAPI
 
 # * Inisialisasi Path dengan tanda ("/")
-@app.get("/") # * http://127.0.0.1:8000 default akses url
+@app.get("/") # * http://127.0.0.1:8000/ default akses url
 async def root():
     return {"message": "Hello World, Welcome to FastAPI Web Framework"}
 
 @app.get("/api-endpoint") # * http://127.0.0.1:8000/api-endpoint
-async def firt_api():
+async def first_api():
     return {"message": "Welcome to path '/api-endpoint', Response HTTP GET Method"} 
 
 # * Membuat list users
@@ -54,7 +54,7 @@ async def read_user_me():
     return {"user_id": "the current user"}
 """
 
-@app.get("/users/{user_name}") # * http://127.0.0.1:8000/users/John%20Doe/
+@app.get("/users/{user_name}") # * http://127.0.0.1:8000/users/Mark%20James
 async def read_user_by_name(user_name: str):
     for user in USERS:
         if user.get("name").casefold() == user_name.casefold():
@@ -62,7 +62,7 @@ async def read_user_by_name(user_name: str):
 
 # * HTTP GET Using Query Parameters
 @app.get("/users/")
-async def read_user_email_by_query_params(user_email: str): # * http://127.0.0.1:8000/users/?user_email=mark%40example.com
+async def read_user_email_by_query_params(user_email: str): # * http://127.0.0.1:8000/users/?user_email=calisa%40example.com
     user_email_to_return = []
     for user in USERS:
         if user.get("email").casefold() == user_email.casefold():
@@ -72,7 +72,7 @@ async def read_user_email_by_query_params(user_email: str): # * http://127.0.0.1
 
 # Todo: Mendapatkan semua pengguna dari kota tertentu menggunakan Query atau Path Parameter
 @app.get("/users/bycountry/")
-async def read_user_by_country_path(user_country: str): # * http://127.0.0.1:8000/users/bycountry?user_country=kanada
+async def read_user_by_country_path(user_country: str): # * http://127.0.0.1:8000/users/bycountry/?user_country=kanada
     user_city_to_return = []
     for user in USERS:
         if user.get("country").casefold() == user_country.casefold():
@@ -81,10 +81,34 @@ async def read_user_by_country_path(user_country: str): # * http://127.0.0.1:800
     return user_city_to_return
 
 @app.get("/users/{user_id}/")
-async def read_user_email_country_by_query(user_id: int, email: str, country: str):
+async def read_user_email_country_by_query(user_id: int, email: str, country: str): # * http://127.0.0.1:8000/users/1/?email=john%40example.com&country=US
     user_to_return = []
     for user in USERS:
-        if user.get("email").casefold() == email.casefold() and user.get("country").casefold() == country.casefold() and user.get("id") == user_id:
+        if (
+            user.get("id") == user_id and
+            user.get("email").casefold() == email.casefold() and
+            user.get("country").casefold() == country.casefold()
+        ):
             user_to_return.append(user)
     
     return user_to_return
+
+# * HTTP POST Method
+@app.post("/users/create_user")
+async def create_user(new_user: dict = Body(...)): # * http://127.0.0.1:8000/users/create_user
+    USERS.append(new_user)
+
+# * HTTP PUT Method
+@app.put("/users/update_country")
+async def update_phone(updated_country: dict = Body(...)): # * http://127.0.0.1:8000/users/update_phone
+    for i, user in enumerate(USERS):
+        if user["country"].lower() == updated_country["country"].lower():
+            USERS[i] = updated_country
+
+# * HTTP DELETE Method
+@app.delete("/users/delete_user/{user_name}")
+async def delete_user(user_name: str): # * http://127.0.0.1:8000/users/delete_user/Jane%20Jannet
+    for i, user in enumerate(USERS):
+        if user.get("name").casefold() == user_name.casefold():
+            USERS.pop(i)
+            break

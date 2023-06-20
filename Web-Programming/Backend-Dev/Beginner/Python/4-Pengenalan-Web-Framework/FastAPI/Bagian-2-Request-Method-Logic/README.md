@@ -199,3 +199,48 @@ async def read_user_phone_by_query(user_name: str, user_phone: str):
 ```
 
 # POST HTTP Request Method
+## Jadi apa itu POST Method?
+Metode POST dalam permintaan HTTP digunakan untuk membuat data baru. Perbedaan utama antara metode `POST` dan metode `GET` adalah bahwa metode `POST` dapat mengirimkan data dalam tubuh permintaan (`request body`), sementara metode `GE`T tidak memiliki kemampuan ini.
+
+Contoh penggunaan tubuh permintaan (`request body`) pada metode `POST` adalah ketika kita ingin mengirimkan data user lengkap yang tidak termasuk dalam URL permintaan. Misalnya, kita dapat mengirimkan data user baru dengan isian: 
+```python
+{"id": 6, "name": "Jhon Wiley", "email": "jwiley@example.com", "phone": "08776xxxxxxx", "city": "Argentina"}
+``` 
+sebagai permintaan POST ke aplikasi backend kita (misalnya, menggunakan FastAPI). Dalam implementasi fungsi create_user, kami dapat langsung menambahkan new_user ke dalam daftar users, karena new_user berisi data user baru yang diterima melalui tubuh permintaan (`request body`). Silahkan lihat kode blok dibawah ini untuk lebih jelasnya:
+```python
+# * HTTP POST Method
+@app.post("/users/create_user")
+async def create_user(new_user=Body()):
+    USERS.append(new_user)
+```
+
+# PUT HTTP Request Method
+## Jadi apa itu PUT Method?
+Metode permintaan `PUT` digunakan untuk memperbarui data. Permintaan `PUT` dapat memiliki tubuh permintaan (`request body`) yang berisi informasi tambahan, sama seperti permintaan `POST`. Permintaan `PUT` dapat memiliki tubuh permintaan (`request body`) yang berisi informasi tambahan, sama seperti permintaan `POST`. 
+
+Misalnya, alih-alih membuat user baru, kita akan mengirimkan user yang sudah ada, tetapi kita akan dapat mengubah field  phone atau city. Silahkan lihat kode blok dibawah ini untuk lebih jelasnya:
+```python
+# * HTTP PUT Method
+@app.put("/users/update_phone")
+async def update_book(updated_phone=Body()):
+    for i in range(len(USERS)):
+        if USERS[i].get("phone").casefold() == updated_phone.get("phone").casefold():
+            USERS[i] = updated_phone
+```
+
+# DELETE HTTP Request Method
+## Jadi apa itu DELETE Method?
+Metode DELETE digunakan untuk menghapus data. Jadi, jika kita memiliki permintaan localhost port 8000 diikuti dengan /books/delete-user, kita dapat melampirkan parameter path. Parameter path tersebut adalah nama user yang akan dihapus dari daftar. Kita dapat menulis sebuah fungsi yang akan melakukan itu.
+
+Namun, hal pertama yang perlu kita perhatikan adalah kita menggunakan `app.delete`, dan kemudian kita memiliki endpoint API `/books/delete-book/{user_name}`. Pada fungsi async def `delete_user`, kita menerima parameter `user_name` karena itu adalah parameter path dinamis yang kita gunakan. Kemudian, kita melakukan loop pada semua user sampai kita menemukan kecocokan pada namanya, dan kemudian kita akan menghapus nama tersebut dari daftar dan keluar dari loop.
+
+Fungsi ini cukup sederhana. Mari kita beralih ke kode dan menulis endpoint API delete kita.
+```python
+# * HTTP DELETE Method
+@app.delete("/users/delete_user/{user_name}")
+async def delete_user(user_name: str): # * http://127.0.0.1:8000/users/delete_user/Roby%20Elison
+    for i in range(len(USERS)):
+        if USERS[i].get("name").casefold() == user_name.casefold():
+            USERS.pop(i)
+            break
+```
