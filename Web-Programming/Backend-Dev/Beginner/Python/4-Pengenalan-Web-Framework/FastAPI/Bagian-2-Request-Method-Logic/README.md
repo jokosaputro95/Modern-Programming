@@ -3,7 +3,7 @@
 - [POST HTTP Request Method](#post-http-request-method)
 - [PUT HTTP Request Method](#put-http-request-method)
 - [DELETE HTTP Request Method](#delete-http-request-method)
-- [Rangkuman]()
+- [Rangkuman](#rangkuman)
 
 # GET HTTP Request Method
 ## Creating a FastAPI Application
