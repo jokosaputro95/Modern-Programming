@@ -86,8 +86,8 @@ Path parameter adalah bagian dari URL yang digunakan untuk menyampaikan data spe
 USERS = [
     {"id": 1, "name": "John Doe", "email": "john@example.com", "phone": "08771xxxxxxx", "city": "US"},
     {"id": 2, "name": "Jane Jannet", "email": "jane@example.com", "phone": "08772xxxxxxx", "city": "US"},
-    {"id": "3", "name": "Calisa Jannet", "email": "calisa@example.com", "phone": "08773xxxxxxx", "city": "Kanada"},
-    {"id": "4", "name": "Mark James", "email": "mark@example.com", "phone": "08774xxxxxxx", "city": "Tiongkok"},
+    {"id": 3, "name": "Calisa Jannet", "email": "calisa@example.com", "phone": "08773xxxxxxx", "city": "Kanada"},
+    {"id": 4, "name": "Mark James", "email": "mark@example.com", "phone": "08774xxxxxxx", "city": "Tiongkok"},
     {"id": 5, "name": "Roby Elison", "email": "robyl@example.com", "phone": "08775xxxxxxx", "city": "Kanada"}
 ]
 ```
