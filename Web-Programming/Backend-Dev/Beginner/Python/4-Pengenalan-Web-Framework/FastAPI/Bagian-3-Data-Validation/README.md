@@ -1,3 +1,10 @@
+# Table of Contents
+- [Validasi Data](#validasi-data)
+- [Pydantic](#pydantic)
+    - [Apa itu Pydantic](#apa-itu-pydantic)
+    - [Cara Kerja Pydantic](#bagaimana-cara-kerja-pydantic)
+    - [Blok Kode](#block-kode)
+
 # Validasi Data
 Validasi data adalah proses memastikan bahwa data yang diterima atau diproses sesuai dengan aturan atau persyaratan yang telah ditentukan. Validasi data penting dalam pengembangan API karena beberapa alasan:
 
@@ -18,6 +25,7 @@ Pydantic adalah sebuah pustaka Python yang digunakan untuk memvalidasi dan mengu
 ## Bagaimana cara kerja Pydantic?
 Pydantic bekerja dengan cara melakukan validasi otomatis berdasarkan anotasi tipe data yang ditentukan dalam model. Anotasi tipe data Pydantic mendefinisikan tipe data dan aturan validasi untuk setiap field dalam model. Saat data diterima atau dikirimkan melalui API, Pydantic akan memeriksa apakah data tersebut sesuai dengan aturan validasi yang telah ditentukan. Jika data tidak valid, Pydantic akan menghasilkan pesan kesalahan yang sesuai.
 
+## Block Kode
 Perhatikan baris kode berikut ini:
 ```python
 import uvicorn
