@@ -62,6 +62,20 @@ async def create_user(
     USERS.append(new_user)
     return USERS
 """
+"""
+# Todo: Cara 3 Using path parameter
+@app.post('/user')
+async def add_user(user: User):
+    new_user = {
+        'id': len(USERS) + 1,
+        'name': user.name,
+        'email': user.email,
+        'phone': user.phone,
+        'country': user.country
+    }
+    USERS.append(new_user)
+    return new_user
+"""
 
 @app.put('/user/{id}')
 async def updated_user_by_id(id: int, updated_user: User):
