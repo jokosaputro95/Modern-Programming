@@ -120,3 +120,31 @@ async def delete_user(user_name: str): # * http://127.0.0.1:8000/users/delete_us
 #             del USERS[i]
 #             return {"message": "User deleted successfully."}
 #     return {"message": "User not found."}
+"""
+# * Menggunakan model list comprehension
+@app.delete('/user/{id}')
+async def delete_user_by_id(id: int):
+    pengguna_terhapus = [pengguna for pengguna in USERS if pengguna["id"] == id]
+    if not pengguna_terhapus:
+        return f"ID pengguna {id} tidak ditemukan!"
+    else:
+        pengguna_tersisa = [pengguna for pengguna in USERS if pengguna["id"] != id]
+        USERS[:] = pengguna_tersisa  # Memperbarui daftar USERS untuk menghapus pengguna yang terhapus
+        return {"pesan": f"Pengguna dengan ID {id} telah dihapus", "pengguna_terhapus": pengguna_terhapus, "pengguna_tersisa": pengguna_tersisa}
+    
+# * Tidak menggunakan model list comprehension
+@app.delete('/user/{id}')
+async def delete_user_by_id(id: int):
+    pengguna_terhapus = []
+    for pengguna in USERS:
+        if pengguna["id"] == id:
+            pengguna_terhapus.append(pengguna)
+            USERS.remove(pengguna)
+            break
+    if not pengguna_terhapus:
+        return f"ID pengguna {id} tidak ditemukan!"
+    else:
+        pengguna_tersisa = USERS
+        return {"pesan": f"Pengguna dengan ID {id} telah dihapus", "pengguna_terhapus": pengguna_terhapus, "pengguna_tersisa": pengguna_tersisa}
+
+"""
